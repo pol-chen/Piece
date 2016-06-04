@@ -4,6 +4,8 @@ const path = require('path');
 const Tray = require('tray');
 const Menu = require('menu');
 
+const globalShortcut = require('global-shortcut');
+
 require('crash-reporter').start();
 
 app.on('window-all-closed', function() {
@@ -11,6 +13,47 @@ app.on('window-all-closed', function() {
 		app.quit();
 	}
 });
+
+let appIcon = null;
+let contextMenu = Menu.buildFromTemplate([
+	{
+		label: 'Float',
+		type: 'checkbox',
+		checked: true,
+    accelerator: 'Command+Alt+F',
+		click: toggleFloat
+	},
+	{
+		label: 'Show',
+		type: 'checkbox',
+		checked: true,
+    accelerator: 'Command+Alt+S',
+		click: function () {
+			if (mainWindow.isVisible()) {
+				mainWindow.hide();
+			} else {
+				mainWindow.show();
+			}
+		}
+	},
+	{
+		type: 'separator'
+	},
+	{
+		label: 'About Piece',
+		click: function () {
+		}
+	},
+	{
+		type: 'separator'
+	},
+	{
+		label: 'Quit Piece',
+		click: function () {
+			app.quit();
+		}
+	}
+]);
 
 app.on('ready', function() {
 	mainWindow = new BrowserWindow({
@@ -30,55 +73,37 @@ app.on('ready', function() {
 		mainWindow = null;
 	});
 
-	let appIcon = null
-	const iconPath = path.join(__dirname, '/app/img/logo-peace.png')
-	appIcon = new Tray(iconPath)
-	const contextMenu = Menu.buildFromTemplate([
-		{
-			label: 'Float',
-			type: 'checkbox',
-			checked: true,
-      accelerator: 'Command+Alt+F',
-			click: function () {
-				mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
-			}
-		},
-		{
-			label: 'Show',
-			type: 'checkbox',
-			checked: true,
-      accelerator: 'Command+Alt+S',
-			click: function () {
-				if (mainWindow.isVisible()) {
-					mainWindow.hide();
-				} else {
-					mainWindow.show();
-				}
-			}
-		},
-		{
-			type: 'separator'
-		},
-		{
-			label: 'About Piece',
-			click: function () {
-			}
-		},
-		{
-			type: 'separator'
-		},
-		{
-			label: 'Quit Piece',
-			click: function () {
-				app.quit();
-			}
-		}
-	])
-	appIcon.setToolTip('Piece')
-	appIcon.setContextMenu(contextMenu)
+	const iconPath = path.join(__dirname, '/app/img/logo-peace.png');
+	appIcon = new Tray(iconPath);
+	appIcon.setToolTip('Piece');
+	appIcon.setContextMenu(contextMenu);
+
+	setGlobalShortcuts();
 
 });
 
 function toggleFloat() {
-	mainWindow.alwaysOnTop = !mainWindow.alwaysOnTop;
+	mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
+}
+function toggleShow() {
+	if (mainWindow.isVisible()) {
+		mainWindow.hide();
+	} else {
+		mainWindow.show();
+	}
+}
+
+function setGlobalShortcuts() {
+	globalShortcut.unregisterAll();
+
+	globalShortcut.register('Cmd+Alt+F', function () {
+		toggleFloat();
+		contextMenu.items[0].checked = mainWindow.isAlwaysOnTop();
+		appIcon.setContextMenu(contextMenu);
+	});
+	globalShortcut.register('Cmd+Alt+S', function () {
+		toggleShow();
+		contextMenu.items[1].checked = mainWindow.isVisible();
+		appIcon.setContextMenu(contextMenu);
+	});
 }
