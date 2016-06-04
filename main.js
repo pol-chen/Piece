@@ -1,22 +1,73 @@
-var app = require('app');
-var BrowserWindow = require('browser-window');
+const app = require('app');
+const BrowserWindow = require('browser-window');
+const path = require('path');
+const Tray = require('tray');
+const Menu = require('menu');
 
 require('crash-reporter').start();
 
 app.on('window-all-closed', function() {
-  if (process.platform != 'darwin') {
-    app.quit();
-  }
+	if (process.platform != 'darwin') {
+		app.quit();
+	}
 });
 
 app.on('ready', function() {
-  mainWindow = new BrowserWindow({width: 244, height: 374});
+	mainWindow = new BrowserWindow({
+		width: 244,
+		height: 374,
+		// frame: false
+	});
 
-  mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
+	app.dock.hide();
 
-  mainWindow.openDevTools();
+	mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
 
-  mainWindow.on('closed', function() {
-    mainWindow = null;
-  });
+	// mainWindow.openDevTools();
+
+	mainWindow.on('closed', function() {
+		mainWindow = null;
+	});
+
+	let appIcon = null
+	const iconPath = path.join(__dirname, '/app/img/logo-peace.png')
+	appIcon = new Tray(iconPath)
+	const contextMenu = Menu.buildFromTemplate([
+		{
+			label: 'Float',
+			type: 'radio',
+			checked: true,
+      accelerator: 'Command+Alt+F',
+			click: function () {
+			}
+		},
+		{
+			label: 'Show',
+			type: 'radio',
+			checked: true,
+      accelerator: 'Command+Alt+S',
+			click: function () {
+			}
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'About Piece',
+			click: function () {
+			}
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Quit Piece',
+			click: function () {
+				app.quit();
+			}
+		}
+	])
+	appIcon.setToolTip('Piece')
+	appIcon.setContextMenu(contextMenu)
+
 });
