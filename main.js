@@ -6,6 +6,8 @@ const Menu = require('menu');
 
 const globalShortcut = require('global-shortcut');
 
+const config = require('./config');
+
 require('crash-reporter').start();
 
 app.on('window-all-closed', function() {
@@ -57,11 +59,12 @@ let contextMenu = Menu.buildFromTemplate([
 
 app.on('ready', function() {
 	mainWindow = new BrowserWindow({
-		width: 244,
-		height: 374,
+		width: config.readConfig('width'),
+		height: config.readConfig('height'),
 		// frame: false,
 		alwaysOnTop: true,
 	});
+
 
 	app.dock.hide();
 
@@ -79,7 +82,6 @@ app.on('ready', function() {
 	appIcon.setContextMenu(contextMenu);
 
 	setGlobalShortcuts();
-
 });
 
 function toggleFloat() {
