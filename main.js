@@ -33,8 +33,7 @@ let contextMenu = Menu.buildFromTemplate([
 	},
 	{
 		label: 'About Piece',
-		click: function () {
-		}
+		click: openAboutWindow
 	},
 	{
 		type: 'separator'
@@ -52,6 +51,31 @@ app.on('window-all-closed', () => {
 		app.quit();
 	}
 });
+
+let aboutWindow = null;
+function openAboutWindow() {
+	if (aboutWindow) {
+		return;
+	}
+
+	aboutWindow = new BrowserWindow({
+		width: 366,
+		height: 388,
+		resizable: false,
+		minimizable: false
+	})
+
+	aboutWindow.loadURL('file://' + __dirname + '/app/about.html');
+
+	aboutWindow.on('resize', () => {
+		let size = aboutWindow.getSize();
+		console.log(size);
+	});
+
+	aboutWindow.on('closed', () => {
+		aboutWindow = null;
+	});
+}
 
 function openMainWindow() {
 	mainWindow = new BrowserWindow({
