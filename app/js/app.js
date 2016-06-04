@@ -2,17 +2,17 @@ require('../less/main.less');
 
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-var App = React.createClass({
-  render: function(){
+import AppContainer from './containers/app.container'
+
+class App extends React.Component {
+  render () {
     return (
-      <div className="app">
-        Here we go.
-      </div>
+      <AppContainer />
     )
   }
-});
+}
 
 ReactDOM.render(<App />, document.getElementById('content'));
