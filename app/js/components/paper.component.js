@@ -5,6 +5,13 @@ class Paper extends React.Component {
 		super(props);
 		this.displayName = 'Paper';
 	}
+	componentDidMount() {
+		let textarea = document.querySelector('textarea');
+		let val = textarea.innerHTML;
+		textarea.focus();
+		textarea.innerHTML = "";
+		textarea.innerHTML = val;
+	}
 	render() {
 		return (
 			<div className='paper'>

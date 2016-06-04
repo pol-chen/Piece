@@ -21,9 +21,9 @@ class AppContainer extends React.Component {
 		props.itemValue = this.state.itemValue;
 		return (
 			<div className="app">
-      	<Logo />
-      	<Paper {...props} />
-      </div>
+				<Logo />
+				<Paper {...props} />
+			</div>
 		)
 	}
 }
