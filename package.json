@@ -1,0 +1,38 @@
+{
+	"name": "piece",
+	"productName": "Piece",
+	"version": "1.0.0",
+	"description": "Less equals more.",
+	"author": "Polaris Chen",
+	"license": "MIT",
+	"main": "main.js",
+	"scripts": {
+		"start": "./node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron .",
+		"watch": "./node_modules/.bin/webpack-dev-server",
+		"electron-rebuild": "./node_modules/.bin/electron-rebuild"
+	},
+	"devDependencies": {
+		"babel-core": "^6.7.2",
+		"babel-loader": "^6.2.4",
+		"babel-preset-es2015": "^6.3.13",
+		"babel-preset-react": "^6.3.13",
+		"css-loader": "^0.23.1",
+		"electron-packager": "^7.0.3",
+		"electron-rebuild": "^1.1.3",
+		"less": "^2.6.1",
+		"less-loader": "^2.2.2",
+		"node-libs-browser": "^1.0.0",
+		"style-loader": "^0.13.0",
+		"webpack": "^1.12.14",
+		"webpack-dev-server": "^1.14.1"
+	},
+	"dependencies": {
+		"electron-prebuilt": "^0.37.2",
+		"react": "^0.14.7",
+		"react-dom": "^0.14.3"
+	},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PolarisChen/Piece"
+  }
+}
