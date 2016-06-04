@@ -75,7 +75,11 @@ app.on('ready', function () {
 		let size = mainWindow.getSize();
 		config.saveConfig('width', size[0]);
 		config.saveConfig('height', size[1]);
-	})
+	});
+
+	mainWindow.on('close', function () {
+		mainWindow.webContents.send('close-main-window');
+	});
 
 	mainWindow.on('closed', function () {
 		mainWindow = null;
@@ -88,7 +92,6 @@ app.on('ready', function () {
 
 	setGlobalShortcuts();
 });
-
 
 function toggleFloat() {
 	mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
