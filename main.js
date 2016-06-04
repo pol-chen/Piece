@@ -49,6 +49,11 @@ app.on('ready', function() {
 			checked: true,
       accelerator: 'Command+Alt+S',
 			click: function () {
+				if (mainWindow.isVisible()) {
+					mainWindow.hide();
+				} else {
+					mainWindow.show();
+				}
 			}
 		},
 		{
