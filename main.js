@@ -6,6 +6,7 @@ const Menu = require('menu');
 
 const globalShortcut = require('global-shortcut');
 
+const {ipcMain} = require('electron');
 const config = require('./config');
 
 require('crash-reporter').start();
@@ -24,13 +25,7 @@ let contextMenu = Menu.buildFromTemplate([
 		type: 'checkbox',
 		checked: true,
     accelerator: 'Command+Alt+S',
-		click: function () {
-			if (mainWindow.isVisible()) {
-				mainWindow.hide();
-			} else {
-				mainWindow.show();
-			}
-		}
+		click: toggleShow
 	},
 	{
 		type: 'separator'
@@ -51,13 +46,13 @@ let contextMenu = Menu.buildFromTemplate([
 	}
 ]);
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
 	if (process.platform != 'darwin') {
 		app.quit();
 	}
 });
 
-app.on('ready', function () {
+app.on('ready', () => {
 	mainWindow = new BrowserWindow({
 		width: config.readConfig('width'),
 		height: config.readConfig('height'),
@@ -65,23 +60,33 @@ app.on('ready', function () {
 		alwaysOnTop: true,
 	});
 
+	if (config.readConfig('x') && config.readConfig('y')) {
+		mainWindow.setPosition(config.readConfig('x'), config.readConfig('y'));
+	}
+
 	app.dock.hide();
 
-	mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
+	mainWindow.loadURL('file://' + __dirname + '/app/index.html');
 
 	// mainWindow.openDevTools();
 
-	mainWindow.on('resize', function () {
+	mainWindow.on('resize', () => {
 		let size = mainWindow.getSize();
 		config.saveConfig('width', size[0]);
 		config.saveConfig('height', size[1]);
 	});
 
-	mainWindow.on('close', function () {
+	mainWindow.on('move', () => {
+		let position = mainWindow.getPosition();
+		config.saveConfig('x', position[0]);
+		config.saveConfig('y', position[1]);
+	});
+
+	mainWindow.on('close', () => {
 		mainWindow.webContents.send('close-main-window');
 	});
 
-	mainWindow.on('closed', function () {
+	mainWindow.on('closed', () => {
 		mainWindow = null;
 	});
 
@@ -91,6 +96,10 @@ app.on('ready', function () {
 	appIcon.setContextMenu(contextMenu);
 
 	setGlobalShortcuts();
+});
+
+ipcMain.on('save-content', (event, arg) => {
+  config.saveConfig('content', arg);
 });
 
 function toggleFloat() {
@@ -107,12 +116,12 @@ function toggleShow() {
 function setGlobalShortcuts() {
 	globalShortcut.unregisterAll();
 
-	globalShortcut.register('Cmd+Alt+F', function () {
+	globalShortcut.register('Cmd+Alt+F', () => {
 		toggleFloat();
 		contextMenu.items[0].checked = mainWindow.isAlwaysOnTop();
 		appIcon.setContextMenu(contextMenu);
 	});
-	globalShortcut.register('Cmd+Alt+S', function () {
+	globalShortcut.register('Cmd+Alt+S', () => {
 		toggleShow();
 		contextMenu.items[1].checked = mainWindow.isVisible();
 		appIcon.setContextMenu(contextMenu);

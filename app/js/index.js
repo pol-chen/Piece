@@ -1,7 +1,7 @@
 'use strict';
 
 const config = require('../config');
-const ipc = require('ipc');
+const {ipcRenderer} = require('electron');
 
 let content = config.readConfig('content');
 let paper = document.querySelector('textarea');
@@ -9,7 +9,7 @@ let span = document.querySelector('span');
 span.innerHTML = content;
 paper.innerHTML = content.replace(/<br>/g, '\n');
 
-ipc.on('close-main-window', function () {
+ipcRenderer.on('close-main-window', () => {
 	let content = document.querySelector('span').innerHTML;
-    config.saveConfig('content', content);
+	ipcRenderer.send('save-content', content);
 });
