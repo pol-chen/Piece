@@ -10,12 +10,6 @@ const config = require('./config');
 
 require('crash-reporter').start();
 
-app.on('window-all-closed', function() {
-	if (process.platform != 'darwin') {
-		app.quit();
-	}
-});
-
 let appIcon = null;
 let contextMenu = Menu.buildFromTemplate([
 	{
@@ -57,7 +51,13 @@ let contextMenu = Menu.buildFromTemplate([
 	}
 ]);
 
-app.on('ready', function() {
+app.on('window-all-closed', function () {
+	if (process.platform != 'darwin') {
+		app.quit();
+	}
+});
+
+app.on('ready', function () {
 	mainWindow = new BrowserWindow({
 		width: config.readConfig('width'),
 		height: config.readConfig('height'),
@@ -65,14 +65,19 @@ app.on('ready', function() {
 		alwaysOnTop: true,
 	});
 
-
 	app.dock.hide();
 
 	mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
 
 	// mainWindow.openDevTools();
 
-	mainWindow.on('closed', function() {
+	mainWindow.on('resize', function () {
+		let size = mainWindow.getSize();
+		config.saveConfig('width', size[0]);
+		config.saveConfig('height', size[1]);
+	})
+
+	mainWindow.on('closed', function () {
 		mainWindow = null;
 	});
 
@@ -83,6 +88,7 @@ app.on('ready', function() {
 
 	setGlobalShortcuts();
 });
+
 
 function toggleFloat() {
 	mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
