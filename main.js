@@ -12,19 +12,20 @@ const config = require('./config');
 require('crash-reporter').start();
 
 let appIcon = null;
+let mainWindow = null;
 let contextMenu = Menu.buildFromTemplate([
 	{
 		label: 'Float',
 		type: 'checkbox',
 		checked: true,
-    accelerator: 'Command+Alt+F',
+    accelerator: 'Shift+Alt+F',
 		click: toggleFloat
 	},
 	{
 		label: 'Show',
 		type: 'checkbox',
 		checked: true,
-    accelerator: 'Command+Alt+S',
+    accelerator: 'Shift+Alt+S',
 		click: toggleShow
 	},
 	{
@@ -52,11 +53,11 @@ app.on('window-all-closed', () => {
 	}
 });
 
-app.on('ready', () => {
+function openMainWindow() {
 	mainWindow = new BrowserWindow({
 		width: config.readConfig('width'),
 		height: config.readConfig('height'),
-		// frame: false,
+		frame: false,
 		alwaysOnTop: true,
 	});
 
@@ -64,11 +65,7 @@ app.on('ready', () => {
 		mainWindow.setPosition(config.readConfig('x'), config.readConfig('y'));
 	}
 
-	app.dock.hide();
-
 	mainWindow.loadURL('file://' + __dirname + '/app/index.html');
-
-	// mainWindow.openDevTools();
 
 	mainWindow.on('resize', () => {
 		let size = mainWindow.getSize();
@@ -84,11 +81,21 @@ app.on('ready', () => {
 
 	mainWindow.on('close', () => {
 		mainWindow.webContents.send('close-main-window');
+		contextMenu.items[1].checked = false;
+		appIcon.setContextMenu(contextMenu);
 	});
 
 	mainWindow.on('closed', () => {
 		mainWindow = null;
 	});
+}
+
+app.on('ready', () => {
+	app.dock.hide();
+
+	openMainWindow();
+
+	// mainWindow.openDevTools();
 
 	const iconPath = path.join(__dirname, '/app/img/logo-peace.png');
 	appIcon = new Tray(iconPath);
@@ -103,27 +110,33 @@ ipcMain.on('save-content', (event, arg) => {
 });
 
 function toggleFloat() {
-	mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
+	if (!mainWindow) {
+		openMainWindow();
+	}
+	mainWindow.setAlwaysOnTop(contextMenu.items[0].checked);
 }
 function toggleShow() {
-	if (mainWindow.isVisible()) {
-		mainWindow.hide();
-	} else {
+	if (!mainWindow) {
+		openMainWindow();
+	}
+	if (contextMenu.items[1].checked) {
 		mainWindow.show();
+	} else {
+		mainWindow.hide();
 	}
 }
 
 function setGlobalShortcuts() {
 	globalShortcut.unregisterAll();
 
-	globalShortcut.register('Cmd+Alt+F', () => {
+	globalShortcut.register('Shift+Alt+F', () => {
+		contextMenu.items[0].checked = !contextMenu.items[0].checked;
 		toggleFloat();
-		contextMenu.items[0].checked = mainWindow.isAlwaysOnTop();
 		appIcon.setContextMenu(contextMenu);
 	});
-	globalShortcut.register('Cmd+Alt+S', () => {
+	globalShortcut.register('Shift+Alt+S', () => {
+		contextMenu.items[1].checked = !contextMenu.items[1].checked;
 		toggleShow();
-		contextMenu.items[1].checked = mainWindow.isVisible();
 		appIcon.setContextMenu(contextMenu);
 	});
 }
