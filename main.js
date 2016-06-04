@@ -16,7 +16,8 @@ app.on('ready', function() {
 	mainWindow = new BrowserWindow({
 		width: 244,
 		height: 374,
-		// frame: false
+		// frame: false,
+		alwaysOnTop: true,
 	});
 
 	app.dock.hide();
@@ -35,15 +36,16 @@ app.on('ready', function() {
 	const contextMenu = Menu.buildFromTemplate([
 		{
 			label: 'Float',
-			type: 'radio',
+			type: 'checkbox',
 			checked: true,
       accelerator: 'Command+Alt+F',
 			click: function () {
+				mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
 			}
 		},
 		{
 			label: 'Show',
-			type: 'radio',
+			type: 'checkbox',
 			checked: true,
       accelerator: 'Command+Alt+S',
 			click: function () {
@@ -71,3 +73,7 @@ app.on('ready', function() {
 	appIcon.setContextMenu(contextMenu)
 
 });
+
+function toggleFloat() {
+	mainWindow.alwaysOnTop = !mainWindow.alwaysOnTop;
+}
