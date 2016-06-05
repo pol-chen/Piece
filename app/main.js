@@ -193,7 +193,6 @@ function openMainWindow() {
 	});
 
 	mainWindow.on('close', () => {
-		mainWindow.webContents.send('close-main-window');
 		contextMenu.items[1].checked = false;
 		appIcon.setContextMenu(contextMenu);
 	});
@@ -202,6 +201,7 @@ function openMainWindow() {
 		mainWindow = null;
 	});
 }
+
 
 const defaultConfig = require('./config.default');
 
@@ -238,8 +238,7 @@ app.on('ready', () => {
 });
 
 ipcMain.on('save-content', (event, arg) => {
-  config.saveConfig('content', arg);
-  console.log(arg);
+	config.saveConfig('content', arg);
 });
 
 function toggleFloat() {

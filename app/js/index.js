@@ -9,7 +9,8 @@ let span = document.querySelector('span');
 span.innerHTML = content;
 paper.innerHTML = content.replace(/<br>/g, '\n');
 
-ipcRenderer.on('close-main-window', () => {
+window.onbeforeunload = (e) => {
 	let content = document.querySelector('span').innerHTML;
 	ipcRenderer.send('save-content', content);
-});
+	// e.returnValue = false;
+};

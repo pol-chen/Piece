@@ -11,9 +11,6 @@ class AppContainer extends React.Component {
 	}
 	handleChange(e) {
 		this.setState({itemValue: e.target.value});
-		if (e.keyCode == 13) {
-			alert("ssd")
-		}
 	}
 	render() {
 		let props = {};
