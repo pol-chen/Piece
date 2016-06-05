@@ -203,8 +203,18 @@ function openMainWindow() {
 	});
 }
 
+const defaultConfig = require('./config.default');
+
+function initConfig() {
+	if (!config.readConfig('x')) {
+		config.saveConfig('width', defaultConfig.width);
+		config.saveConfig('height', defaultConfig.height);
+		config.saveConfig('content', defaultConfig.content);
+	}
+}
 
 app.on('ready', () => {
+	initConfig();
 
 	openMainWindow();
 
