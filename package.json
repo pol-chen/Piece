@@ -16,7 +16,7 @@
     "clean:osx": "rm -rf ./dist/osx",
     "clean:win": "rm -rf ./dist/win",
     "build": "npm run build:osx && npm run build:win",
-    "build:osx": "build --osx",
+    "build:osx": "build --osx"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
