@@ -8,7 +8,7 @@ class Logo extends React.Component {
 	render() {
 		return (
 			<div className='logo'>
-				<img src="../app/img/logo-peace.png" srcSet="../app/img/logo-peace@2x.png 2x" />
+				<img src="./img/logo-peace.png" srcSet="./img/logo-peace@2x.png 2x" />
 			</div>
 		)
 	}
