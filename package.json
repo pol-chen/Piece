@@ -12,22 +12,11 @@
     "build-osx": "electron-packager . Piece --overwrite --prune --platform=darwin --arch=x64 --version=0.37.8 --icon=app/img/app-icon.icns",
     "postinstall": "install-app-deps",
     "dev": "NODE_ENV='development' npm run start",
-    "dist": "npm run dist:osx && npm run dist:win32 && npm run dist:win64",
-    "dist:osx": "build --osx",
-    "dist:win32": "build --platform win32 --arch ia32",
-    "dist:win64": "build --platform win32 --arch x64",
-
     "clean": "rm -rf ./dist",
     "clean:osx": "rm -rf ./dist/osx",
     "clean:win": "rm -rf ./dist/win",
-
-    "pack": "npm run clean && npm run pack:osx && npm run pack:win",
-    "pack:osx": "npm run clean:osx && electron-packager . \"Piece\" --out=dist/osx --platform=darwin --arch=x64 --version=0.37.8 --icon=app/img/app-icon.icns --ignore=dist --ignore=assets --ignore=builder.json --ignore=bower.json --ignore=README.md --ignore=.gitignore --ignore=preview.png",
-    "pack:win": "npm run clean:win && electron-packager . \"Piece\" --out=dist/win --platform=win32 --arch=ia32 --version=0.37.8 --icon=assets/win/logo.ico --ignore=dist --ignore=assets --ignore=builder.json --ignore=bower.json --ignore=README.md --ignore=.gitignore --ignore=preview.png",
-
     "build": "npm run build:osx && npm run build:win",
-    "build:osx": "build \"dist/osx/Piece-darwin-x64/Piece.app\" --osx",
-    "build:win": "npm run pack:win && electron-builder \"dist/win/Piece-win32-ia32\" --platform=win --out=\"dist/win\" --config=builder.json"
+    "build:osx": "build --osx",
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
