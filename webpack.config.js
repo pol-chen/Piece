@@ -38,6 +38,6 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(new RegExp("^(fs|ipcMain|ipcRender|path|nconf)$"))
+    new webpack.IgnorePlugin(new RegExp("^(electron|fs|ipcMain|ipcRender|path|nconf)$"))
   ]
 }
