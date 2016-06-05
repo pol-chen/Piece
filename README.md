@@ -21,7 +21,7 @@ Hope you like it:)
 
 ## Installation
 
-- Mac OS X: [click here to download][https://github.com/PolarisChen/Piece/releases/download/v1.0.0/Piece-1.0.0.dmg]
+- Mac OS X: [click here to download](https://github.com/PolarisChen/Piece/releases/download/v1.0.0/Piece-1.0.0.dmg)
 - Linux: coming soon!
 - Windows: coming soon!
 
@@ -34,4 +34,4 @@ Hope you like it:)
 
 MIT © 2016 Polaris Chen
 
-Crafted with love by [Polaris][http://bus1996.me]
+Crafted with love by [Polaris](http://bus1996.me)
