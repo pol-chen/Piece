@@ -1,0 +1,16 @@
+{
+  "name": "piece",
+  "productName": "Piece",
+  "version": "1.0.0",
+  "description": "Less equals more.",
+  "author": "Polaris Chen",
+  "license": "MIT",
+  "homepage": "http://bus1996.me",
+  "main": "main.js",
+  "dependencies": {
+    "electron-prebuilt": "^0.37.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.3",
+    "nconf": "^0.7.2"
+  }
+}
