@@ -1,18 +1,19 @@
-require('../less/main.less');
-
 'use strict';
+
+require('../less/main.less');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import AppContainer from './containers/app.container'
+import App from './containers/App';
 
-class App extends React.Component {
-  render () {
-    return (
-      <AppContainer />
-    )
+console.error = (() => {
+  var error = console.error;
+  return function(exception) {
+    if ((exception + '').indexOf('Warning: Unknown props') != 0) {
+      error.apply(console, arguments);
+    }
   }
-}
+})();
 
-ReactDOM.render(<App />, document.getElementById('content'));
+ReactDOM.render(<App />, document.getElementById('app'));

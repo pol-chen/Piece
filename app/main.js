@@ -1,15 +1,8 @@
-const app = require('app');
-const BrowserWindow = require('browser-window');
+
+const {app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray} = require('electron');
 const path = require('path');
-const Tray = require('tray');
-const Menu = require('menu');
 
-const globalShortcut = require('global-shortcut');
-
-const {ipcMain} = require('electron');
 const config = require('./config');
-
-require('crash-reporter').start();
 
 let appIcon = null;
 let mainWindow = null;
@@ -45,7 +38,6 @@ let contextMenu = Menu.buildFromTemplate([
 		}
 	}
 ]);
-
 
 let mainMenu = Menu.buildFromTemplate([
 	{
@@ -170,8 +162,8 @@ function openMainWindow() {
 	mainWindow = new BrowserWindow({
 		width: config.readConfig('width'),
 		height: config.readConfig('height'),
-		frame: false,
-		alwaysOnTop: true
+		frame: true,
+		alwaysOnTop: false
 	});
 
 	if (config.readConfig('x') && config.readConfig('y')) {
@@ -218,7 +210,7 @@ app.on('ready', () => {
 
 	openMainWindow();
 
-	// mainWindow.openDevTools();
+	mainWindow.openDevTools();
 
 	const iconPath = path.join(__dirname, '/img/tray-icon.png');
 	appIcon = new Tray(iconPath);
@@ -229,15 +221,16 @@ app.on('ready', () => {
 
 	app.focus();
 	app.show();
-	mainWindow.setAlwaysOnTop(true);
+	mainWindow.setAlwaysOnTop(false);
 	mainWindow.show();
 	mainWindow.focus();
-	app.dock.hide();
+	// app.dock.hide();
 
-    Menu.setApplicationMenu(mainMenu);
+  Menu.setApplicationMenu(mainMenu);
 });
 
 ipcMain.on('save-content', (event, arg) => {
+	console.log('CONTENT', arg);
 	config.saveConfig('content', arg);
 });
 
@@ -271,4 +264,8 @@ function setGlobalShortcuts() {
 		toggleShow();
 		appIcon.setContextMenu(contextMenu);
 	});
+
+	// globalShortcut.register('CmdOrCtrl+S', () => {
+	// 	ipcMain.send('force-save-content');
+	// });
 }

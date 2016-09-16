@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 
 class Paper extends React.Component {
@@ -23,4 +25,3 @@ class Paper extends React.Component {
 }
 
 export default Paper;
-

@@ -1,8 +1,11 @@
-import React from 'react';
-import Logo from '../components/logo.component';
-import Paper from '../components/paper.component';
+'use strict';
 
-class AppContainer extends React.Component {
+import React from 'react';
+
+import Logo from '../components/Logo';
+import Paper from '../components/Paper';
+
+class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -25,4 +28,4 @@ class AppContainer extends React.Component {
 	}
 }
 
-export default AppContainer;
+export default App;
