@@ -1,20 +1,12 @@
 {
-  "name": "piece",
-  "productName": "Piece",
-  "version": "1.0.0",
-  "description": "Less equals more.",
-  "author": "Polaris Chen",
-  "main": "./app/main.js",
   "scripts": {
     "start": "electron ./app --enable-logging",
-    "watch": "./node_modules/.bin/webpack-dev-server",
-    "electron-rebuild": "./node_modules/.bin/electron-rebuild",
-    "build-osx": "electron-packager . Piece --overwrite --prune --platform=darwin --arch=x64 --version=0.37.8 --icon=app/img/app-icon.icns",
+    "watch": "webpack-dev-server",
+    "electron-rebuild": "electron-rebuild",
     "postinstall": "install-app-deps",
     "dev": "NODE_ENV='development' npm run start",
     "clean": "rm -rf ./dist",
     "clean:osx": "rm -rf ./dist/osx",
-    "clean:win": "rm -rf ./dist/win",
     "build": "npm run build:osx && npm run build:win",
     "build:osx": "build --osx"
   },
@@ -23,11 +15,12 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
-    "css-loader": "^0.23.1",
-    "electron-builder": "^4.2.2",
-    "electron-packager": "^7.0.3",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.25.0",
+    "electron": "^1.4.0",
+    "electron-builder": "^6.7.6",
     "electron-rebuild": "^1.1.3",
-    "file-loader": "^0.8.5",
+    "file-loader": "^0.9.0",
     "json-loader": "^0.5.4",
     "less": "^2.6.1",
     "less-loader": "^2.2.2",
@@ -36,12 +29,6 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
-  },
-  "dependencies": {
-    "electron-prebuilt": "^0.37.2",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.3",
-    "nconf": "^0.7.2"
   },
   "repository": {
     "type": "git",
