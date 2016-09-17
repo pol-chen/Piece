@@ -4,6 +4,7 @@ import React from 'react';
 import {CompositeDecorator, ContentState, Editor, EditorState} from 'draft-js';
 
 const config = window.require('./config');
+const {ipcRenderer} = window.require('electron');
 
 class Paper extends React.Component {
 	constructor() {
@@ -30,6 +31,7 @@ class Paper extends React.Component {
 		this.onChange = (editorState) => {
 			this.setState({editorState});
 			const content = editorState.getCurrentContent().getPlainText();
+			ipcRenderer.send('save-content', content);
 		};
 		this.logState = () => console.log(this.state.editorState.toJS());
 	}
