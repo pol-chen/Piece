@@ -151,7 +151,6 @@ function openAboutWindow() {
 
 	aboutWindow.on('resize', () => {
 		let size = aboutWindow.getSize();
-		console.log(size);
 	});
 
 	aboutWindow.on('closed', () => {
@@ -248,7 +247,6 @@ app.on('ready', () => {
 });
 
 ipcMain.on('save-content', (event, arg) => {
-	console.log('CONTENT', arg);
 	config.saveConfig('content', arg);
 });
 
@@ -278,8 +276,13 @@ function setGlobalShortcuts() {
 		appIcon.setContextMenu(contextMenu);
 	});
 	globalShortcut.register('Shift+Alt+S', () => {
-		contextMenu.items[1].checked = !contextMenu.items[1].checked;
-		toggleShow();
-		appIcon.setContextMenu(contextMenu);
+		if (mainWindow.isVisible() && !mainWindow.isFocused()) {
+			mainWindow.hide();
+			mainWindow.show();
+		} else {
+			contextMenu.items[1].checked = !contextMenu.items[1].checked;
+			toggleShow();
+			appIcon.setContextMenu(contextMenu);
+		}
 	});
 }
