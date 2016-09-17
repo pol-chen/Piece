@@ -1,3 +1,4 @@
+const devtoolsInstaller = require('electron-devtools-installer');
 
 const {app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray} = require('electron');
 const path = require('path');
@@ -158,12 +159,26 @@ function openAboutWindow() {
 	});
 }
 
+function installDevtools () {
+  devtoolsInstaller.default(devtoolsInstaller.REACT_DEVELOPER_TOOLS)
+    .then((name) => console.log(`Added Extension: ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
+}
+
 function openMainWindow() {
+	let frame = false;
+	let alwaysOnTop = true;
+
+	if (process.env.NODE_ENV === 'development') {
+		frame = true;
+		alwaysOnTop = false;
+	}
+
 	mainWindow = new BrowserWindow({
 		width: config.readConfig('width'),
 		height: config.readConfig('height'),
-		frame: true,
-		alwaysOnTop: false
+		frame: frame,
+		alwaysOnTop: alwaysOnTop
 	});
 
 	if (config.readConfig('x') && config.readConfig('y')) {
@@ -210,8 +225,6 @@ app.on('ready', () => {
 
 	openMainWindow();
 
-	mainWindow.openDevTools();
-
 	const iconPath = path.join(__dirname, '/img/tray-icon.png');
 	appIcon = new Tray(iconPath);
 	appIcon.setToolTip('Piece');
@@ -221,10 +234,15 @@ app.on('ready', () => {
 
 	app.focus();
 	app.show();
-	mainWindow.setAlwaysOnTop(false);
 	mainWindow.show();
 	mainWindow.focus();
-	// app.dock.hide();
+
+	if (process.env.NODE_ENV === 'development') {
+		installDevtools();
+		mainWindow.openDevTools();
+	} else {
+		app.dock.hide();
+	}
 
   Menu.setApplicationMenu(mainMenu);
 });
@@ -264,8 +282,4 @@ function setGlobalShortcuts() {
 		toggleShow();
 		appIcon.setContextMenu(contextMenu);
 	});
-
-	// globalShortcut.register('CmdOrCtrl+S', () => {
-	// 	ipcMain.send('force-save-content');
-	// });
 }
