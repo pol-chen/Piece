@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Less equals more.",
   "author": "Polaris Chen",
+  "copyright": "© 2016, Polaris Chen",
   "license": "MIT",
   "homepage": "http://bus1996.me",
   "main": "main.js",

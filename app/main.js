@@ -12,14 +12,14 @@ let contextMenu = Menu.buildFromTemplate([
 		label: 'Float',
 		type: 'checkbox',
 		checked: true,
-    	accelerator: 'Shift+Alt+F',
+    accelerator: 'Shift+Alt+F',
 		click: toggleFloat
 	},
 	{
 		label: 'Show',
 		type: 'checkbox',
 		checked: true,
-    	accelerator: 'Shift+Alt+S',
+    accelerator: 'Shift+Alt+S',
 		click: toggleShow
 	},
 	{
@@ -158,7 +158,7 @@ function openAboutWindow() {
 	});
 }
 
-function installDevtools () {
+function installDevtools() {
   devtoolsInstaller.default(devtoolsInstaller.REACT_DEVELOPER_TOOLS)
     .then((name) => console.log(`Added Extension: ${name}`))
     .catch((err) => console.log('An error occurred: ', err));

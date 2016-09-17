@@ -33,7 +33,6 @@ class Paper extends React.Component {
 			const content = editorState.getCurrentContent().getPlainText();
 			ipcRenderer.send('save-content', content);
 		};
-		this.logState = () => console.log(this.state.editorState.toJS());
 
 		this.handleTab = event => {
 			event.preventDefault();
