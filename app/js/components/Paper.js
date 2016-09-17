@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {CompositeDecorator, ContentState, Editor, EditorState} from 'draft-js';
+import {CompositeDecorator, ContentState, Editor, EditorState, Modifier} from 'draft-js';
 
 const config = window.require('./config');
 const {ipcRenderer} = window.require('electron');
@@ -34,6 +34,23 @@ class Paper extends React.Component {
 			ipcRenderer.send('save-content', content);
 		};
 		this.logState = () => console.log(this.state.editorState.toJS());
+
+		this.handleTab = event => {
+			event.preventDefault();
+			const editorState = this.state.editorState;
+			const contentState = editorState.getCurrentContent();
+			const selection = editorState.getSelection();
+			const focusOffset = selection.getFocusOffset();
+			const indentation = this.getIndentation(focusOffset);
+			const newContentState = Modifier.insertText(contentState, selection, indentation, null, null);
+			const newEditorState = EditorState.push(editorState, newContentState, 'insert-characters');
+			this.onChange(newEditorState);
+		};
+	}
+
+	getIndentation(focusOffset) {
+		let indentation = '    ';
+		return indentation.substr(0, 2 - focusOffset % 2);
 	}
 
 	render() {
@@ -43,6 +60,7 @@ class Paper extends React.Component {
 					<Editor
 						editorState={this.state.editorState}
 						onChange={this.onChange}
+						onTab={this.handleTab}
 						ref="editor"
 						spellCheck={true}
 					/>
