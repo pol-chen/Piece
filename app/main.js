@@ -1,4 +1,3 @@
-const devtoolsInstaller = require('electron-devtools-installer');
 
 const {app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray} = require('electron');
 const path = require('path');
@@ -159,6 +158,7 @@ function openAboutWindow() {
 }
 
 function installDevtools() {
+	const devtoolsInstaller = require('electron-devtools-installer');
   devtoolsInstaller.default(devtoolsInstaller.REACT_DEVELOPER_TOOLS)
     .then((name) => console.log(`Added Extension: ${name}`))
     .catch((err) => console.log('An error occurred: ', err));

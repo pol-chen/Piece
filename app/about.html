@@ -3,10 +3,8 @@
   <head>
 		<meta charset="UTF-8">
     <title>About Piece</title>
-    <script src="http://localhost:8080/webpack-dev-server.js"></script>
-    <script src="http://localhost:8080/built/bundle.js"></script>
-    <!-- <script src="built/bundle.js"></script> -->
   </head>
+
   <body>
     <div id="about">
       <div class='logo'>
@@ -23,4 +21,11 @@
     </div>
   </body>
 
+  <script>
+    {
+      const script = document.createElement('script');
+      script.src = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/built/bundle.js' : 'built/bundle.js';
+      document.write(script.outerHTML);
+    }
+  </script>
 </html>
