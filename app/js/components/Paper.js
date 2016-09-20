@@ -54,16 +54,14 @@ class Paper extends React.Component {
 
 	render() {
 		return (
-			<div className="paper">
-				<div className="editor" onClick={this.focus}>
-					<Editor
-						editorState={this.state.editorState}
-						onChange={this.onChange}
-						onTab={this.handleTab}
-						ref="editor"
-						spellCheck={true}
-					/>
-				</div>
+			<div className="paper" ref="paper" onClick={this.focus}>
+				<Editor
+					editorState={this.state.editorState}
+					onChange={this.onChange}
+					onTab={this.handleTab}
+					ref="editor"
+					spellCheck={true}
+				/>
 			</div>
 		);
 	}
