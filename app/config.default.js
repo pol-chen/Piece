@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    width: 314,
-    height: 435,
-    content: "Piece&nbsp;v1.0&nbsp;-&nbsp;Less&nbsp;equals&nbsp;More<br>A&nbsp;simple&nbsp;temporary-note&nbsp;app.<br><br>Now&nbsp;you&nbsp;could&nbsp;list&nbsp;what&nbsp;you&nbsp;gonna&nbsp;do&nbsp;the&nbsp;next&nbsp;day&nbsp;before&nbsp;you&nbsp;go&nbsp;to&nbsp;bed;<br><br>Or&nbsp;you&nbsp;could&nbsp;write&nbsp;down&nbsp;some&nbsp;thoughts&nbsp;temporarily&nbsp;while&nbsp;you&nbsp;are&nbsp;focusing&nbsp;on&nbsp;something&nbsp;else.<br><br>Hope&nbsp;you&nbsp;like&nbsp;it:)"
+  "width": 435,
+  "height": 623,
+  "content": "#Piece_1.1.0\n\nPiece is a simple temporary-note taking app. You could:\n\n- List what you gonna do recently\n\n- Or just write down your thoughts when inspiration hit you\n\n- Show/hide Piece with Alt+Shift+S @anywhere and @anytime\n\n- Highlight time, places, people and themes with @-handle and #-handle like this:\n\n  - Buy some fruits\n  - Update Piece #PROJECT @Tonight\n  - See the movie #StarTrek @Sep.22\n  - Finish the DM exercises #HOMEWORK @Fri.\n  - Design a landing page for Piece #PROJECT\n\nHope you like it :-D\n\nPolaris"
 };
