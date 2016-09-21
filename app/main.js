@@ -229,6 +229,10 @@ app.on('ready', () => {
 	appIcon.setToolTip('Piece');
 	appIcon.setContextMenu(contextMenu);
 
+	appIcon.on('right-click', () => {
+		show();
+	});
+
 	setGlobalShortcuts();
 
 	app.focus();
@@ -265,6 +269,12 @@ function toggleShow() {
 	} else {
 		mainWindow.hide();
 	}
+}
+
+function show() {
+	mainWindow.hide();
+	mainWindow.show();
+	contextMenu.items[1].checked;
 }
 
 function setGlobalShortcuts() {
