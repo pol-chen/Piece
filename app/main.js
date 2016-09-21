@@ -276,13 +276,8 @@ function setGlobalShortcuts() {
 		appIcon.setContextMenu(contextMenu);
 	});
 	globalShortcut.register('Shift+Alt+S', () => {
-		if (mainWindow.isVisible() && !mainWindow.isFocused()) {
-			mainWindow.hide();
-			mainWindow.show();
-		} else {
-			contextMenu.items[1].checked = !contextMenu.items[1].checked;
-			toggleShow();
-			appIcon.setContextMenu(contextMenu);
-		}
+		contextMenu.items[1].checked = !contextMenu.items[1].checked;
+		toggleShow();
+		appIcon.setContextMenu(contextMenu);
 	});
 }
