@@ -4,16 +4,14 @@
     <meta charset="utf-8" />
     <title>Piece</title>
   </head>
-  
+
   <body>
     <div id="root"></div>
   </body>
 
   <script>
-    {
-      const script = document.createElement('script');
-      script.src = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/built/bundle.js' : 'built/bundle.js';
-      document.write(script.outerHTML);
-    }
+    const script = document.createElement('script')
+    script.src = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080/built/bundle.js' : 'built/bundle.js'
+    document.write(script.outerHTML)
   </script>
 </html>

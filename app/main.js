@@ -1,11 +1,11 @@
 
-const {app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray} = require('electron');
-const path = require('path');
+const {app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray} = require('electron')
+const path = require('path')
 
-const config = require('./config');
+const config = require('./config')
 
-let appIcon = null;
-let mainWindow = null;
+let appIcon = null
+let mainWindow = null
 let contextMenu = Menu.buildFromTemplate([
 	{
 		label: 'Float',
@@ -34,10 +34,10 @@ let contextMenu = Menu.buildFromTemplate([
 	{
 		label: 'Quit Piece',
 		click: function () {
-			app.quit();
+			app.quit()
 		}
 	}
-]);
+])
 
 let mainMenu = Menu.buildFromTemplate([
 	{
@@ -71,7 +71,7 @@ let mainMenu = Menu.buildFromTemplate([
 				label: "Quit",
 				accelerator: "Command+Q",
 				click: function() {
-					app.quit();
+					app.quit()
 				}
 			}
 		]
@@ -125,18 +125,18 @@ let mainMenu = Menu.buildFromTemplate([
 			}
 		]
 	}
-]);
+])
 
 app.on('window-all-closed', () => {
 	if (process.platform != 'darwin') {
-		app.quit();
+		app.quit()
 	}
-});
+})
 
-let aboutWindow = null;
+let aboutWindow = null
 function openAboutWindow() {
 	if (aboutWindow) {
-		return;
+		return
 	}
 
 	aboutWindow = new BrowserWindow({
@@ -146,31 +146,31 @@ function openAboutWindow() {
 		minimizable: false
 	})
 
-	aboutWindow.loadURL('file://' + __dirname + '/about.html');
+	aboutWindow.loadURL('file://' + __dirname + '/about.html')
 
 	aboutWindow.on('resize', () => {
-		let size = aboutWindow.getSize();
-	});
+		let size = aboutWindow.getSize()
+	})
 
 	aboutWindow.on('closed', () => {
-		aboutWindow = null;
-	});
+		aboutWindow = null
+	})
 }
 
 function installDevtools() {
-	const devtoolsInstaller = require('electron-devtools-installer');
+	const devtoolsInstaller = require('electron-devtools-installer')
   devtoolsInstaller.default(devtoolsInstaller.REACT_DEVELOPER_TOOLS)
     .then((name) => console.log(`Added Extension: ${name}`))
-    .catch((err) => console.log('An error occurred: ', err));
+    .catch((err) => console.log('An error occurred: ', err))
 }
 
 function openMainWindow() {
-	let frame = false;
-	let alwaysOnTop = true;
+	let frame = false
+	let alwaysOnTop = true
 
 	if (process.env.NODE_ENV === 'development') {
-		frame = true;
-		alwaysOnTop = false;
+		frame = true
+		alwaysOnTop = false
 	}
 
 	mainWindow = new BrowserWindow({
@@ -178,116 +178,116 @@ function openMainWindow() {
 		height: config.readConfig('height'),
 		frame: frame,
 		alwaysOnTop: alwaysOnTop
-	});
+	})
 
 	if (config.readConfig('x') && config.readConfig('y')) {
-		mainWindow.setPosition(config.readConfig('x'), config.readConfig('y'));
+		mainWindow.setPosition(config.readConfig('x'), config.readConfig('y'))
 	}
 
-	mainWindow.loadURL('file://' + __dirname + '/index.html');
+	mainWindow.loadURL('file://' + __dirname + '/index.html')
 
 	mainWindow.on('resize', () => {
-		let size = mainWindow.getSize();
-		config.saveConfig('width', size[0]);
-		config.saveConfig('height', size[1]);
-	});
+		let size = mainWindow.getSize()
+		config.saveConfig('width', size[0])
+		config.saveConfig('height', size[1])
+	})
 
 	mainWindow.on('move', () => {
-		let position = mainWindow.getPosition();
-		config.saveConfig('x', position[0]);
-		config.saveConfig('y', position[1]);
-	});
+		let position = mainWindow.getPosition()
+		config.saveConfig('x', position[0])
+		config.saveConfig('y', position[1])
+	})
 
 	mainWindow.on('close', () => {
-		contextMenu.items[1].checked = false;
-		appIcon.setContextMenu(contextMenu);
-	});
+		contextMenu.items[1].checked = false
+		appIcon.setContextMenu(contextMenu)
+	})
 
 	mainWindow.on('closed', () => {
-		mainWindow = null;
-	});
+		mainWindow = null
+	})
 }
 
 
-const defaultConfig = require('./config.default');
+const defaultConfig = require('./config.default')
 
 function initConfig() {
 	if (!config.readConfig('x')) {
-		config.saveConfig('width', defaultConfig.width);
-		config.saveConfig('height', defaultConfig.height);
-		config.saveConfig('content', defaultConfig.content);
+		config.saveConfig('width', defaultConfig.width)
+		config.saveConfig('height', defaultConfig.height)
+		config.saveConfig('content', defaultConfig.content)
 	}
 }
 
 app.on('ready', () => {
-	initConfig();
+	initConfig()
 
-	openMainWindow();
+	openMainWindow()
 
-	const iconPath = path.join(__dirname, '/img/tray-icon.png');
-	appIcon = new Tray(iconPath);
-	appIcon.setToolTip('Piece');
-	appIcon.setContextMenu(contextMenu);
+	const iconPath = path.join(__dirname, '/img/tray-icon.png')
+	appIcon = new Tray(iconPath)
+	appIcon.setToolTip('Piece')
+	appIcon.setContextMenu(contextMenu)
 
 	appIcon.on('right-click', () => {
-		show();
-	});
+		show()
+	})
 
-	setGlobalShortcuts();
+	setGlobalShortcuts()
 
-	app.focus();
-	app.show();
-	mainWindow.show();
-	mainWindow.focus();
+	app.focus()
+	app.show()
+	mainWindow.show()
+	mainWindow.focus()
 
 	if (process.env.NODE_ENV === 'development') {
-		installDevtools();
-		mainWindow.openDevTools();
+		installDevtools()
+		mainWindow.openDevTools()
 	} else {
-		app.dock.hide();
+		app.dock.hide()
 	}
 
-  Menu.setApplicationMenu(mainMenu);
-});
+  Menu.setApplicationMenu(mainMenu)
+})
 
 ipcMain.on('save-content', (event, arg) => {
-	config.saveConfig('content', arg);
-});
+	config.saveConfig('content', arg)
+})
 
 function toggleFloat() {
 	if (!mainWindow) {
-		openMainWindow();
+		openMainWindow()
 	}
-	mainWindow.setAlwaysOnTop(contextMenu.items[0].checked);
+	mainWindow.setAlwaysOnTop(contextMenu.items[0].checked)
 }
 function toggleShow() {
 	if (!mainWindow) {
-		openMainWindow();
+		openMainWindow()
 	}
 	if (contextMenu.items[1].checked) {
-		mainWindow.show();
+		mainWindow.show()
 	} else {
-		mainWindow.hide();
+		mainWindow.hide()
 	}
 }
 
 function show() {
-	mainWindow.hide();
-	mainWindow.show();
-	contextMenu.items[1].checked;
+	mainWindow.hide()
+	mainWindow.show()
+	contextMenu.items[1].checked
 }
 
 function setGlobalShortcuts() {
-	globalShortcut.unregisterAll();
+	globalShortcut.unregisterAll()
 
 	globalShortcut.register('Shift+Alt+F', () => {
-		contextMenu.items[0].checked = !contextMenu.items[0].checked;
-		toggleFloat();
-		appIcon.setContextMenu(contextMenu);
-	});
+		contextMenu.items[0].checked = !contextMenu.items[0].checked
+		toggleFloat()
+		appIcon.setContextMenu(contextMenu)
+	})
 	globalShortcut.register('Shift+Alt+S', () => {
-		contextMenu.items[1].checked = !contextMenu.items[1].checked;
-		toggleShow();
-		appIcon.setContextMenu(contextMenu);
-	});
+		contextMenu.items[1].checked = !contextMenu.items[1].checked
+		toggleShow()
+		appIcon.setContextMenu(contextMenu)
+	})
 }

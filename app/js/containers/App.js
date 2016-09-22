@@ -1,13 +1,13 @@
-'use strict';
+'use strict'
 
-import React from 'react';
+import React from 'react'
 
-import Logo from '../components/Logo';
-import Paper from '../components/Paper';
+import Logo from '../components/Logo'
+import Paper from '../components/Paper'
 
 class App extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
 	}
 	render() {
 		return (
@@ -19,4 +19,4 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+export default App

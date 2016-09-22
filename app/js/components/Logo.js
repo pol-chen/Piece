@@ -1,10 +1,10 @@
-'user strict';
+'user strict'
 
-import React from 'react';
+import React from 'react'
 
 class Logo extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
 	}
 	render() {
 		return (
@@ -15,4 +15,4 @@ class Logo extends React.Component {
 	}
 }
 
-export default Logo;
+export default Logo
