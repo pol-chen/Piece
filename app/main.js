@@ -9,13 +9,6 @@ let appIcon = null
 let mainWindow = null
 let contextMenu = Menu.buildFromTemplate([
 	{
-		label: 'Float',
-		type: 'checkbox',
-		checked: true,
-    accelerator: 'Shift+Alt+F',
-		click: toggleFloat
-	},
-	{
 		label: 'Show',
 		type: 'checkbox',
 		checked: true,
@@ -268,17 +261,11 @@ ipcMain.on('save-content', (event, arg) => {
 	config.set('content', arg)
 })
 
-function toggleFloat() {
-	if (!mainWindow) {
-		openMainWindow()
-	}
-	mainWindow.setAlwaysOnTop(contextMenu.items[0].checked)
-}
 function toggleShow() {
 	if (!mainWindow) {
 		openMainWindow()
 	}
-	if (contextMenu.items[1].checked) {
+	if (contextMenu.items[0].checked) {
 		mainWindow.show()
 	} else {
 		mainWindow.hide()
@@ -288,19 +275,14 @@ function toggleShow() {
 function show() {
 	mainWindow.hide()
 	mainWindow.show()
-	contextMenu.items[1].checked
+	contextMenu.items[0].checked
 }
 
 function setGlobalShortcuts() {
 	globalShortcut.unregisterAll()
 
-	globalShortcut.register('Shift+Alt+F', () => {
-		contextMenu.items[0].checked = !contextMenu.items[0].checked
-		toggleFloat()
-		appIcon.setContextMenu(contextMenu)
-	})
 	globalShortcut.register('Shift+Alt+S', () => {
-		contextMenu.items[1].checked = !contextMenu.items[1].checked
+		contextMenu.items[0].checked = !contextMenu.items[0].checked
 		toggleShow()
 		appIcon.setContextMenu(contextMenu)
 	})
