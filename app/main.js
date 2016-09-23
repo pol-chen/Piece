@@ -7,31 +7,7 @@ const config = new Config()
 
 let appIcon = null
 let mainWindow = null
-let contextMenu = Menu.buildFromTemplate([
-	{
-		label: 'Show',
-		type: 'checkbox',
-		checked: true,
-    accelerator: 'Shift+Alt+S',
-		click: toggleShow
-	},
-	{
-		type: 'separator'
-	},
-	{
-		label: 'About Piece',
-		click: openAboutWindow
-	},
-	{
-		type: 'separator'
-	},
-	{
-		label: 'Quit Piece',
-		click: function () {
-			app.quit()
-		}
-	}
-])
+let contextMenu
 let mainMenu = Menu.buildFromTemplate([
 	{
 		label: "Piece",
@@ -223,6 +199,8 @@ function initConfig() {
 			config.set('height', defaultConfig.height)
 			config.set('content', defaultConfig.content)
 		}
+		config.set('shortcutShow', 'Shift+Alt+S')
+		config.set('alwaysOnTop', true)
 	}
 }
 
@@ -234,6 +212,32 @@ app.on('ready', () => {
 	const iconPath = path.join(__dirname, '/img/tray-icon.png')
 	appIcon = new Tray(iconPath)
 	appIcon.setToolTip('Piece')
+
+	contextMenu = Menu.buildFromTemplate([
+		{
+			label: 'Show',
+			type: 'checkbox',
+			checked: true,
+	    accelerator: config.get('shortcutShow'),
+			click: toggleShow
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'About Piece',
+			click: openAboutWindow
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Quit Piece',
+			click: function () {
+				app.quit()
+			}
+		}
+	])
 	appIcon.setContextMenu(contextMenu)
 
 	appIcon.on('right-click', () => {
@@ -281,7 +285,7 @@ function show() {
 function setGlobalShortcuts() {
 	globalShortcut.unregisterAll()
 
-	globalShortcut.register('Shift+Alt+S', () => {
+	globalShortcut.register(config.get('shortcutShow'), () => {
 		contextMenu.items[0].checked = !contextMenu.items[0].checked
 		toggleShow()
 		appIcon.setContextMenu(contextMenu)
