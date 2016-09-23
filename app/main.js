@@ -143,7 +143,10 @@ function openAboutWindow() {
 		width: 366,
 		height: 434,
 		resizable: false,
-		minimizable: false
+		minimizable: false,
+		maximizable: false,
+		fullscreenable: false,
+		alwaysOnTop: true
 	})
 
 	aboutWindow.loadURL('file://' + __dirname + '/about.html')
