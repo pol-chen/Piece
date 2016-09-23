@@ -1,8 +1,9 @@
 
 const {app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray} = require('electron')
 const path = require('path')
+const Config = require('electron-config')
 
-const config = require('./config')
+const config = new Config()
 
 let appIcon = null
 let mainWindow = null
@@ -38,7 +39,6 @@ let contextMenu = Menu.buildFromTemplate([
 		}
 	}
 ])
-
 let mainMenu = Menu.buildFromTemplate([
 	{
 		label: "Piece",
@@ -177,28 +177,28 @@ function openMainWindow() {
 	}
 
 	mainWindow = new BrowserWindow({
-		width: config.readConfig('width'),
-		height: config.readConfig('height'),
+		width: config.get('width'),
+		height: config.get('height'),
 		frame: frame,
 		alwaysOnTop: alwaysOnTop
 	})
 
-	if (config.readConfig('x') && config.readConfig('y')) {
-		mainWindow.setPosition(config.readConfig('x'), config.readConfig('y'))
+	if (config.has('x') && config.has('y')) {
+		mainWindow.setPosition(config.get('x'), config.get('y'))
 	}
 
 	mainWindow.loadURL('file://' + __dirname + '/index.html')
 
 	mainWindow.on('resize', () => {
 		let size = mainWindow.getSize()
-		config.saveConfig('width', size[0])
-		config.saveConfig('height', size[1])
+		config.set('width', size[0])
+		config.set('height', size[1])
 	})
 
 	mainWindow.on('move', () => {
 		let position = mainWindow.getPosition()
-		config.saveConfig('x', position[0])
-		config.saveConfig('y', position[1])
+		config.set('x', position[0])
+		config.set('y', position[1])
 	})
 
 	mainWindow.on('close', () => {
@@ -212,13 +212,24 @@ function openMainWindow() {
 }
 
 
-const defaultConfig = require('./config.default')
 
 function initConfig() {
-	if (!config.readConfig('x')) {
-		config.saveConfig('width', defaultConfig.width)
-		config.saveConfig('height', defaultConfig.height)
-		config.saveConfig('content', defaultConfig.content)
+	if (!config.has('content')) {
+		const oldConfig = require('./config')
+		if (oldConfig.readConfig('x')) {
+			// Old config exists
+			config.set('x', oldConfig.readConfig('x'))
+			config.set('y', oldConfig.readConfig('y'))
+			config.set('width', oldConfig.readConfig('width'))
+			config.set('height', oldConfig.readConfig('height'))
+			config.set('content', oldConfig.readConfig('content'))
+		} else {
+			// Not exists
+			const defaultConfig = require('./config.default')
+			config.set('width', defaultConfig.width)
+			config.set('height', defaultConfig.height)
+			config.set('content', defaultConfig.content)
+		}
 	}
 }
 
@@ -254,7 +265,7 @@ app.on('ready', () => {
 })
 
 ipcMain.on('save-content', (event, arg) => {
-	config.saveConfig('content', arg)
+	config.set('content', arg)
 })
 
 function toggleFloat() {

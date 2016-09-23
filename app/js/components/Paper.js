@@ -3,8 +3,9 @@
 import React from 'react'
 import {CompositeDecorator, ContentState, Editor, EditorState, Modifier} from 'draft-js'
 
-const config = window.require('./config')
 const {ipcRenderer} = window.require('electron')
+const Config = window.require('electron-config')
+const config = new Config()
 
 class Paper extends React.Component {
 	constructor() {
@@ -21,7 +22,7 @@ class Paper extends React.Component {
 			},
 		])
 
-		const content = config.readConfig('content')
+		const content = config.get('content')
 		const contentState = ContentState.createFromText(content)
 		this.state = {
 			editorState: EditorState.createWithContent(contentState, compositeDecorator),
