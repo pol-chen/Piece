@@ -9,6 +9,7 @@ let appIcon
 let mainWindow
 let contextMenu
 let aboutWindow
+let prefsWindow
 
 function setAlwaysOnTop(top) {
 	mainWindow.setAlwaysOnTop(top)
@@ -146,6 +147,27 @@ function openAboutWindow() {
 	})
 }
 
+function createPrefsWindow() {
+	if (prefsWindow) {
+		return
+	}
+
+	prefsWindow = new BrowserWindow({
+		width: 366,
+		height: 434
+	})
+
+	prefsWindow.loadURL('file://' + __dirname + '/prefs.html')
+
+	if (process.env.NODE_ENV === 'development') {
+		prefsWindow.openDevTools()
+	}
+	
+	prefsWindow.on('closed', () => {
+		prefsWindow = null
+	})
+}
+
 function setAppIcon() {
 	const iconPath = path.join(__dirname, '/img/tray-icon.png')
 	appIcon = new Tray(iconPath)
@@ -163,7 +185,8 @@ function setAppIcon() {
 			type: 'separator'
 		},
 		{
-			label: 'Preferences'
+			label: 'Preferences',
+			click: createPrefsWindow
 		},
 		{
 			label: 'About Piece',

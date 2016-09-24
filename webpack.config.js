@@ -6,12 +6,17 @@ module.exports = {
       'webpack/hot/dev-server',
       'webpack-dev-server/client?http://localhost:8080',
       './app/js/app.js'
+    ],
+    prefs: [
+      'webpack/hot/dev-server',
+      'webpack-dev-server/client?http://localhost:8080',
+      './app/js/prefs.js'
     ]
   },
 
   output: {
     path: './app/built',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     publicPath: 'http://localhost:8080/built/'
   },
 
