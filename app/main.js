@@ -54,6 +54,16 @@ ipcMain.on('save-content', (event, arg) => {
 	config.set('content', arg)
 })
 
+ipcMain.on('toggle-always-on-top', (event, arg) => {
+	config.set('alwaysOnTop', arg)
+	setAlwaysOnTop(arg)
+})
+
+ipcMain.on('toggle-auto-launch', (event, arg) => {
+	config.set('autoLaunch', arg)
+	setAutoLaunch(arg)
+})
+
 function initConfig() {
 	if (!config.has('content')) {
 		const oldConfig = require('./config')
@@ -162,7 +172,7 @@ function createPrefsWindow() {
 	if (process.env.NODE_ENV === 'development') {
 		prefsWindow.openDevTools()
 	}
-	
+
 	prefsWindow.on('closed', () => {
 		prefsWindow = null
 	})
