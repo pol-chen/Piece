@@ -7,6 +7,11 @@ module.exports = {
       'webpack-dev-server/client?http://localhost:8080',
       './app/js/app.js'
     ],
+    about: [
+      'webpack/hot/dev-server',
+      'webpack-dev-server/client?http://localhost:8080',
+      './app/js/about.js'
+    ],
     prefs: [
       'webpack/hot/dev-server',
       'webpack-dev-server/client?http://localhost:8080',
