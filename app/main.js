@@ -164,7 +164,12 @@ function createPrefsWindow() {
 
 	prefsWindow = new BrowserWindow({
 		width: 366,
-		height: 434
+		height: 139,
+		resizable: false,
+		minimizable: false,
+		maximizable: false,
+		fullscreenable: false,
+		alwaysOnTop: true
 	})
 
 	prefsWindow.loadURL('file://' + __dirname + '/prefs.html')

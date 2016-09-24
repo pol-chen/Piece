@@ -1,5 +1,7 @@
 'use strict'
 
+require('../less/main.less')
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -21,7 +23,7 @@ class PrefsPanel extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="content">
         <Checkbox
           label="Always on top"
           onChange={this.handleCheckAlwaysOnTop}
