@@ -1,6 +1,6 @@
 'use strict'
 
-require('../less/main.less')
+require('../less/about.less')
 
 import React from 'react'
 import ReactDOM from 'react-dom'

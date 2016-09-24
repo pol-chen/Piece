@@ -1,0 +1,36 @@
+@background-color: #F5F4F1;
+@text-color:       #828179;
+@brand-color:      #89846C;
+
+@font-face {
+	font-family: 'Klartext Mono Light';
+	src: url('../fonts/KlartextMono-Light-webfont.eot');
+	src: url('../fonts/KlartextMono-Light-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/KlartextMono-Light-webfont.woff2') format('woff2'),
+			 url('../fonts/KlartextMono-Light-webfont.woff') format('woff'),
+			 url('../fonts/KlartextMono-Light-webfont.ttf') format('truetype'),
+			 url('../fonts/KlartextMono-Light-webfont.svg#klartext_monolight') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	margin: 0;
+	background-color: @background-color;
+	-webkit-app-region: drag;
+	font-family: "Klartext Mono Light", "Pingfang SC", "Open Sans", "Lantinghei SC";
+	overflow: hidden;
+}
+
+#root {
+	height: 100%;
+}
+
+.content {
+	padding: 40px 30px;
+}
