@@ -2,12 +2,14 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: ['./app/js/app.js']
+    app: ['./app/js/app.js'],
+    about: ['./app/js/about.js'],
+    prefs: ['./app/js/prefs.js']
   },
 
   output: {
     path: './app/built',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     publicPath: './built/'
   },
 
