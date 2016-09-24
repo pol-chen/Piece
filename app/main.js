@@ -10,52 +10,28 @@ let mainWindow
 let contextMenu
 let aboutWindow
 
+function setAlwaysOnTop(top) {
+	mainWindow.setAlwaysOnTop(top)
+}
+
+function setAutoLaunch(enable) {
+	const AutoLaunch = require('auto-launch')
+	const autoLauncher = new AutoLaunch({name: 'Piece'})
+	if (enable) {
+		autoLauncher.enable()
+	} else {
+		autoLauncher.disable()
+	}
+}
+
 app.on('ready', () => {
 	initConfig()
 
 	openMainWindow()
 
-	const iconPath = path.join(__dirname, '/img/tray-icon.png')
-	appIcon = new Tray(iconPath)
-	appIcon.setToolTip('Piece')
-
-	contextMenu = Menu.buildFromTemplate([
-		{
-			label: 'Show',
-			type: 'checkbox',
-			checked: true,
-	    accelerator: config.get('shortcutShow'),
-			click: toggleShow
-		},
-		{
-			type: 'separator'
-		},
-		{
-			label: 'About Piece',
-			click: openAboutWindow
-		},
-		{
-			type: 'separator'
-		},
-		{
-			label: 'Quit Piece',
-			click: function () {
-				app.quit()
-			}
-		}
-	])
-	appIcon.setContextMenu(contextMenu)
-
-	appIcon.on('right-click', () => {
-		show()
-	})
+	setAppIcon()
 
 	setGlobalShortcuts()
-
-	app.focus()
-	app.show()
-	mainWindow.show()
-	mainWindow.focus()
 
 	if (process.env.NODE_ENV === 'development') {
 		installDevtools()
@@ -63,6 +39,8 @@ app.on('ready', () => {
 	} else {
 		app.dock.hide()
 	}
+
+	setAutoLaunch(config.get('autoLaunch'))
 })
 
 app.on('window-all-closed', () => {
@@ -94,6 +72,7 @@ function initConfig() {
 		}
 		config.set('shortcutShow', 'Shift+Alt+S')
 		config.set('alwaysOnTop', true)
+		config.set('autoLaunch', true)
 	}
 }
 
@@ -164,6 +143,46 @@ function openAboutWindow() {
 
 	aboutWindow.on('closed', () => {
 		aboutWindow = null
+	})
+}
+
+function setAppIcon() {
+	const iconPath = path.join(__dirname, '/img/tray-icon.png')
+	appIcon = new Tray(iconPath)
+	appIcon.setToolTip('Piece')
+
+	contextMenu = Menu.buildFromTemplate([
+		{
+			label: 'Show',
+			type: 'checkbox',
+			checked: true,
+			accelerator: config.get('shortcutShow'),
+			click: toggleShow
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Preferences'
+		},
+		{
+			label: 'About Piece',
+			click: openAboutWindow
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Quit Piece',
+			click: function () {
+				app.quit()
+			}
+		}
+	])
+	appIcon.setContextMenu(contextMenu)
+
+	appIcon.on('right-click', () => {
+		show()
 	})
 }
 
