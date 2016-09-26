@@ -2,7 +2,7 @@
 
 # Piece - Less equals More
 
-![Screenshot](screenshot.png)
+<img src="screenshot.png" height="600"/>
 
 A simple temporary-note taking app.
 
