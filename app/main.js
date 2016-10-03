@@ -130,7 +130,7 @@ function openMainWindow() {
 	})
 
 	mainWindow.on('close', () => {
-		contextMenu.items[1].checked = false
+		contextMenu.items[0].checked = false
 		appIcon.setContextMenu(contextMenu)
 	})
 
@@ -269,9 +269,14 @@ function toggleShow() {
 }
 
 function show() {
-	mainWindow.hide()
-	mainWindow.show()
-	contextMenu.items[0].checked
+	if (!mainWindow) {
+		openMainWindow()
+	} else {
+		mainWindow.hide()
+		mainWindow.show()
+	}
+	contextMenu.items[0].checked = true
+	appIcon.setContextMenu(contextMenu)
 }
 
 function setGlobalShortcuts() {
