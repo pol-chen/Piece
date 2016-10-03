@@ -260,11 +260,12 @@ function installDevtools() {
 function toggleShow() {
 	if (!mainWindow) {
 		openMainWindow()
-	}
-	if (contextMenu.items[0].checked) {
-		mainWindow.show()
 	} else {
-		mainWindow.hide()
+		if (contextMenu.items[0].checked) {
+			mainWindow.show()
+		} else {
+			mainWindow.hide()
+		}
 	}
 }
 
