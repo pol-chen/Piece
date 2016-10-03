@@ -1,8 +1,10 @@
+'use strict'
+
 const shell = window.require('electron').shell
 
 exports.addExternalLinks = () => {
   const links = document.querySelectorAll('a[href]')
-  
+
   Array.prototype.forEach.call(links, function (link) {
     const url = link.getAttribute('href')
     console.log(url)
