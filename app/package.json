@@ -3,7 +3,10 @@
   "productName": "Piece",
   "version": "1.1.0",
   "description": "Less equals more.",
-  "author": "Polaris Chen",
+  "author": {
+    "name": "Polaris Chen",
+    "email": "polaris_chen@163.com"
+  },
   "copyright": "© 2016 Polaris Chen",
   "license": "MIT",
   "homepage": "http://bus1996.me",
