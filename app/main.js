@@ -137,20 +137,26 @@ function openAboutWindow() {
 	}
 
 	aboutWindow = new BrowserWindow({
-		width: 366,
-		height: 434,
+		width: 300,
+		height: 300,
 		resizable: false,
 		minimizable: false,
 		maximizable: false,
 		fullscreenable: false,
-		alwaysOnTop: true
+		alwaysOnTop: true,
+		titleBarStyle: 'hidden'
 	})
 
 	aboutWindow.loadURL('file://' + __dirname + '/about.html')
 
-	aboutWindow.on('resize', () => {
-		let size = aboutWindow.getSize()
-	})
+	if (process.env.NODE_ENV === 'development') {
+		aboutWindow.setResizable(true)
+		aboutWindow.on('resize', () => {
+			let size = aboutWindow.getSize()
+			console.log(size)
+		})
+		aboutWindow.openDevTools()
+	}
 
 	aboutWindow.on('closed', () => {
 		aboutWindow = null

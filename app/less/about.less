@@ -1,17 +1,20 @@
 @import "base";
-@import "logo";
 
 #about {
 	padding: 40px 30px;
 	font-size: 14px;
+	text-align: center;
 	overflow: hidden;
+	.logo {
+		margin-bottom: 20px;
+	}
 	h1 {
 		margin-bottom: 14px;
 		color: @brand-color;
 		font-size: 14px;
 	}
 	p {
-		margin-bottom: 8px;
+		margin: 4px 0;
 		color: @text-color;
 		font-size: 12px;
 	}
@@ -20,8 +23,7 @@
 		cursor: pointer;
 	}
 	hr {
-		margin: 12px 0;
+		margin: 36px 0;
 		border: 0;
-		border-top: 1px dashed lighten(@text-color, 10%);
 	}
 }

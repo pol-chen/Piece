@@ -5,22 +5,24 @@ require('../less/about.less')
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import {addExternalLinks} from '../link.js'
+
 class AboutPanel extends React.Component {
+  componentDidMount() {
+    addExternalLinks()
+  }
   render() {
     return (
       <div id="about">
         <div className='logo'>
-          <img src="img/logo-peace.png" srcSet="img/logo-peace@2x.png 2x" />
+          <img src="img/icon.png" height="72" />
         </div>
-        <h1>Piece v1.1.0 - Less equals More</h1>
-        <p>A simple temporary-note taking app.</p>
-        <p>Now you could list what you gonna do the next day before you go to bed;</p>
-        <p>Or you could write down some thoughts temporarily while you are focusing on something else.</p>
-        <p>With @-handle and #-handle you could easily highlight time, places, people and themes.</p>
-        <p>Hope you like it :-D</p>
+        <h1>Piece v1.1.0</h1>
+        <p>Less = More</p>
         <hr />
-        <p>Crafted with ❤ by Polaris &copy; 2016 Polaris Chen</p>
-        <p><a href="mailto:hi.pol.chen@gmail.com">Write me a letter:D</a></p>
+        <p>&copy; 2016 <a href="http://bus1996.me">Polaris Chen</a></p>
+        <p>Crafted with ❤ by Polaris</p>
+        <p><a href="mailto:hi.pol.chen@gmail.com">Write me a letter :-D</a></p>
       </div>
     )
   }
