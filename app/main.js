@@ -5,6 +5,8 @@ const Config = require('electron-config')
 
 const config = new Config()
 
+const backgroundColor = '#F5F4F1'
+
 let appIcon
 let mainWindow
 let contextMenu
@@ -100,7 +102,13 @@ function openMainWindow() {
 		width: config.get('width'),
 		height: config.get('height'),
 		frame: frame,
-		alwaysOnTop: alwaysOnTop
+		alwaysOnTop: alwaysOnTop,
+		backgroundColor: backgroundColor,
+		show: false
+	})
+
+	mainWindow.once('ready-to-show', () => {
+	  mainWindow.show()
 	})
 
 	if (config.has('x') && config.has('y')) {
@@ -144,7 +152,13 @@ function openAboutWindow() {
 		maximizable: false,
 		fullscreenable: false,
 		alwaysOnTop: true,
-		titleBarStyle: 'hidden'
+		titleBarStyle: 'hidden',
+		backgroundColor: backgroundColor,
+		show: false
+	})
+
+	aboutWindow.once('ready-to-show', () => {
+	  aboutWindow.show()
 	})
 
 	aboutWindow.loadURL('file://' + __dirname + '/about.html')
@@ -175,7 +189,13 @@ function createPrefsWindow() {
 		minimizable: false,
 		maximizable: false,
 		fullscreenable: false,
-		alwaysOnTop: true
+		alwaysOnTop: true,
+		backgroundColor: backgroundColor,
+		show: false
+	})
+
+	prefsWindow.once('ready-to-show', () => {
+	  prefsWindow.show()
 	})
 
 	prefsWindow.loadURL('file://' + __dirname + '/prefs.html')
@@ -206,7 +226,7 @@ function setAppIcon() {
 			type: 'separator'
 		},
 		{
-			label: 'Preferences',
+			label: 'Preferences...',
 			click: createPrefsWindow
 		},
 		{
