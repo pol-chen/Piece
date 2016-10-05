@@ -1,10 +1,8 @@
-![Title](title.png)
+<img src="title.png" height="128"/>
 
-# Piece - Less equals More
+# [Piece](http://piece.bus1996.me)
 
-<img src="screenshot.png" height="600"/>
-
-A simple temporary-note taking app.
+A simple **temporary-note** taking app.
 
 Now you could **list what you gonna do** the next day before you go to bed;
 
@@ -14,24 +12,32 @@ With @-handle and #-handle you could easily **highlight time, places, people and
 
 Hope you like it :-D
 
+<img src="screenshot.png" height="600"/>
+
 ## Features
 
-- Floats on your windows. Reachable anytime
-- Covering something you are working at? Just hide it
-- Highlight time, places, people and themes with @ and #
+- **Floats** on your windows. Reachable anytime
+- Covering something you are working at? Just **hide** it
+- **Highlight** time, places, people and themes with @ and #
 - Global shortcuts. Easy to control
 - Simple and elegant user interface design
 
-## Installation
-
-- Mac OS X: [click here to download](https://github.com/PolarisChen/Piece/releases/download/v1.1.0/Piece-1.1.0.dmg)
-- Linux: coming soon!
-- Windows: coming soon!
-
 ## Usage
 
-- Toggle float: <kbd>Alt-Shift-F</kbd>
-- Toggle show: <kbd>Alt-Shift-S</kbd>
+- Press <kbd>Alt+Shift+S</kbd> to show/hide Piece anywhere and anytime.
+- Highlight time, places, people and themes with **@-handle** and **#-handle**.
+
+## Less = More
+
+The product philosophy of Piece is **LESS equals MORE**. It doesn’t matter where we put ours thoughts, ideas and to-dos down. What really counts is that we actually **do** that eventually - go back to my thoughts and work out some problems; continue my new idea and make it big; or just simply get everything listed done. The way how we put the pieces down should be as simple as possible. And this simple way, with your pieces is the **LESS**, which might bring your something **MORE** than you have imagined.
+
+And this is what Piece do.
+
+## Download and enjoy your peace(piece)
+
+- Mac OS X: [click here to download](https://github.com/PolarisChen/Piece/releases/download/v2.0.0/Piece-2.0.0.dmg)
+- Linux: coming soon!
+- Windows: coming soon!
 
 ## License
 
