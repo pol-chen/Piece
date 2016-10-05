@@ -3,10 +3,10 @@
 	font-family: 'Klartext Mono Light';
 	src: url('../fonts/KlartextMono-Light-webfont.eot');
 	src: url('../fonts/KlartextMono-Light-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/KlartextMono-Light-webfont.woff2') format('woff2'),
-			 url('../fonts/KlartextMono-Light-webfont.woff') format('woff'),
-			 url('../fonts/KlartextMono-Light-webfont.ttf') format('truetype'),
-			 url('../fonts/KlartextMono-Light-webfont.svg#klartext_monolight') format('svg');
+		url('../fonts/KlartextMono-Light-webfont.woff2') format('woff2'),
+		url('../fonts/KlartextMono-Light-webfont.woff') format('woff'),
+		url('../fonts/KlartextMono-Light-webfont.ttf') format('truetype'),
+		url('../fonts/KlartextMono-Light-webfont.svg#klartext_monolight') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -18,18 +18,22 @@
 body {
 	margin: 0;
 	background-color: #F5F4F1;
-  color: #828179;
+	color: #828179;
 	font-family: "Klartext Mono Light", serif;
-  font-size: 14px;
+	font-size: 14px;
 }
 
 section {
-  width: 480px;
-  height: 100vh;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 11% 0;
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 480px;
+	min-height: 100vh;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 11% 0;
+	text-align: center;
 }
 
 .logo {
@@ -48,20 +52,21 @@ h1, h2 {
 	font-size: 18px;
 }
 p {
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+	max-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
 	margin-bottom: 8px;
 }
 .justify {
-  margin-bottom: 18px;
-  text-align: justify;
+	margin-bottom: 18px;
+	text-align: justify;
 }
 .hashtag {
-  color: #60BAC5;
+	color: #60BAC5;
 }
 .at {
-  color: #929DE2;
+	color: #929DE2;
 }
 a {
 	color: #ECB268;
@@ -73,18 +78,18 @@ hr {
 	border: 0;
 }
 .button {
-  display: inline-block;
-  margin-top: 20%;
-  padding: 14px 18px;
-  font-family: "Klartext Mono Light", serif;
-  font-size: 16px;
-  color: #FFF;
-  border: none;
-  background-color: #F5C333;
-  box-shadow: 0 1px 2px rgba(0,0,0,.35);
-  cursor: pointer;
-  transition: background .25s;
+	display: inline-block;
+	margin-top: 20%;
+	padding: 14px 18px;
+	font-family: "Klartext Mono Light", serif;
+	font-size: 16px;
+	color: #FFF;
+	border: none;
+	background-color: #F5C333;
+	box-shadow: 0 1px 2px rgba(0,0,0,.35);
+	cursor: pointer;
+	transition: background .25s;
 }
 .button:hover {
-  background-color: #ECB268;
+	background-color: #ECB268;
 }
