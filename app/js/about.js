@@ -17,7 +17,7 @@ class AboutPanel extends React.Component {
         <div className='logo'>
           <img src="img/icon.png" height="72" />
         </div>
-        <h1>Piece v1.1.0</h1>
+        <h1>Piece v2.0.0</h1>
         <p>Less = More</p>
         <hr />
         <p>&copy; 2016 <a href="http://bus1996.me">Polaris Chen</a></p>
