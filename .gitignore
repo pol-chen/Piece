@@ -1,1 +1,6 @@
 .DS_Store
+
+app/built
+app/node_modules
+dist
+node_modules
