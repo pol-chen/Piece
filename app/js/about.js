@@ -17,7 +17,7 @@ class AboutPanel extends React.Component {
         <div className='logo'>
           <img src="img/icon.png" height="72" />
         </div>
-        <h1><a href="http://piece.bus1996.me" title="View Piece landing page">Piece v2.0.1</a></h1>
+        <h1><a href="http://piece.bus1996.me" title="View Piece landing page">Piece v2.0.2</a></h1>
         <p>Less = More</p>
         <hr />
         <p>&copy; 2016 <a href="http://bus1996.me" title="Know more about me">Polaris Chen</a></p>

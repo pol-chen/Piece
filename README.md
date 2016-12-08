@@ -35,7 +35,7 @@ And this is what Piece do.
 
 ## Download and enjoy your peace(piece)
 
-- Mac OS X: [click here to download](https://github.com/PolarisChen/Piece/releases/download/v2.0.1/Piece-2.0.1.dmg)
+- Mac OS X: [click here to download](https://github.com/PolarisChen/Piece/releases/download/v2.0.2/Piece-2.0.2.dmg)
 - Linux: coming soon!
 - Windows: coming soon!
 
