@@ -1,5 +1,5 @@
 
-const {app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray} = require('electron')
+const {app, BrowserWindow, globalShortcut, ipcMain, Menu, nativeImage, Tray} = require('electron')
 const path = require('path')
 const Config = require('electron-config')
 
@@ -300,7 +300,9 @@ function createPrefsWindow() {
 
 function setAppIcon() {
 	const iconPath = path.join(__dirname, '/img/tray-icon.png')
-	appIcon = new Tray(iconPath)
+	const icon = nativeImage.createFromPath(iconPath)
+	icon.setTemplateImage(true)
+	appIcon = new Tray(icon)
 	appIcon.setToolTip('Piece')
 
 	contextMenu = Menu.buildFromTemplate([
