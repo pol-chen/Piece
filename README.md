@@ -1,46 +1,24 @@
-<img src="title.png" height="128"/>
+# Piece 3.0
 
-# [Piece](http://piece.bus1996.me)
+> Piece 3.0 is out on [App Store](https://piece.so) / [piece.so](https://piece.so)! The app is revamped with Swift and polished with a bunch of new features. Download it on [App Store](https://piece.so) and give it a try.
+> 
+> Piece 1.0~2.0 were implemented with Electron five years ago during my college as a side project. Months ago, I finally got some time and decided to rewrite the whole app in Swift, with features that I found useful in my daily use. Here is the [backstory](https://news.ycombinator.com/item?id=29311778) about the Swift rewrite, and [comparison](https://twitter.com/polchen_/status/1429224010852626440) on UI/UX, app size and memory usage between 2.0 (Electron) vs. 3.0 (Swift) in case you're interested.
 
-A simple **temporary-note** taking app.
+Piece is a floating note-taking app for your temporary thoughts.
 
-Now you could **list what you gonna do** the next day before you go to bed;
+- Show/hide Piece by pressing #shift-opt-s or clicking menubar icon
+- Write down your random #thoughts to catch your ideas while staying focused
+- Use it as a prompter when you write, talk or present
+- Jot down your #to-do in a handy & intuitive way:
+    - Buy some ice cream #shopping~
+    - Get movie tickets #Spider-Man @Nov.29
+    - Call @Mom @Sat
+    - Polish and rehearse the #presentation @Mon
+- Hover on text & apply #actions: paste-to-app, copy, delete, and search
+- More premium features: #copy-to-piece, fab #themes, advanced #syntax, ...
 
-Or you could **write down some thoughts** temporarily while you are focusing on something else.
+Stay in your peace of mind and accomplish more, with Piece being the midland for your thoughts.
 
-With @-handle and #-handle you could easily **highlight time, places, people and themes**.
+Enjoy your piece :-D
 
-Hope you like it :-D
-
-<img src="screenshot.png" height="600"/>
-
-## Features
-
-- **Floats** on your windows. Reachable anytime
-- Covering something you are working at? Just **hide** it
-- **Highlight** time, places, people and themes with @ and #
-- Global shortcuts. Easy to control
-- Simple and elegant user interface design
-
-## Usage
-
-- Press <kbd>Alt+Shift+S</kbd> to show/hide Piece anywhere and anytime.
-- Highlight time, places, people and themes with **@-handle** and **#-handle**.
-
-## Less = More
-
-The product philosophy of Piece is **LESS equals MORE**. It doesn’t matter where we put ours thoughts, ideas and to-dos down. What really counts is that we actually **do** that eventually - go back to my thoughts and work out some problems; continue my new idea and make it big; or just simply get everything listed done. The way how we put the pieces down should be as simple as possible. And this simple way, with your pieces is the **LESS**, which might bring your something **MORE** than you have imagined.
-
-And this is what Piece do.
-
-## Download and enjoy your peace(piece)
-
-- Mac OS X: [click here to download](https://github.com/PolarisChen/Piece/releases/download/v2.0.2/Piece-2.0.2.dmg)
-- Linux: coming soon!
-- Windows: coming soon!
-
-## License
-
-MIT © 2016 Polaris Chen
-
-Crafted with love by [Polaris](http://bus1996.me)
+Pol
