@@ -4,7 +4,7 @@
 > 
 > Piece 1.0~2.0 were implemented with Electron five years ago during my college as a side project. Months ago, I finally got some time and decided to rewrite the whole app in Swift, with features that I found useful in my daily use. Here is the [backstory](https://news.ycombinator.com/item?id=29311778) about the Swift rewrite, and [comparison](https://twitter.com/polchen_/status/1429224010852626440) on UI/UX, app size and memory usage between 2.0 (Electron) vs. 3.0 (Swift) in case you're interested.
 
-Piece is a floating note-taking app for your temporary thoughts.
+Piece is a floating note-taking app for your fleeting thoughts.
 
 - Show/hide Piece by pressing #shift-opt-s or clicking menubar icon
 - Write down your random #thoughts to catch your ideas while staying focused
